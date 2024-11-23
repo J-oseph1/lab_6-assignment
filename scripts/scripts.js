@@ -3,7 +3,6 @@
 The instructions describe the missing logic that is needed; you will translate these into JavaScript in the places indicated.
 
 You are encouraged to use the provided naming convention for ease of review.
-
 */
 
 /****************** create variables ******************/
@@ -50,24 +49,25 @@ function recalculate() {
     - then, recalculate() the total cost.
 - finally, uncomment the following line of JavaScript to have this function run automatically whenever the pseudo-button is clicked: */
 
+// Move the changeModel function outside of the inner block
+function changeModel() {
+    let modelText = document.getElementById("model-text");
+
+    if (modelName === "XYZ") {
+        modelName = "CPRG";
+        modelText.innerHTML = "Model CPRG";
+    } else {
+        modelName = "XYZ";
+        modelText.innerHTML = "Model XYZ";
+    }
+
+    recalculate();
+}
+
 function initializeModelButton() {
     let modelButton = document.getElementById("model-button");
 
     if (modelButton) {
-        function changeModel() {
-            let modelText = document.getElementById("model-text");
-
-            if (modelName === "XYZ") {
-                modelName = "CPRG";
-                modelText.innerHTML = "Model CPRG";
-            } else {
-                modelName = "XYZ";
-                modelText.innerHTML = "Model XYZ";
-            }
-
-            recalculate();
-        }
-
         modelButton.addEventListener("click", changeModel);
     } else {
         console.error("Error: 'model-button' element not found in DOM.");
@@ -85,29 +85,31 @@ function initializeModelButton() {
     - finally, attach this function to the "Change Duration" pseudo-button, so it runs whenever the button is clicked.
 */
 
+// Move the changeDuration function outside of the inner block
+function changeDuration() {
+    let durationText = document.getElementById("duration-text");
+    let newDuration = prompt("Enter the new duration in days:");
+
+    if (!isNaN(newDuration) && newDuration > 0) {
+        duration = parseInt(newDuration);
+        durationText.innerHTML = duration;
+        recalculate();
+    } else {
+        alert("Please enter a valid positive number for the duration.");
+    }
+}
+
 function initializeDurationButton() {
     let durationButton = document.getElementById("duration-button");
 
     if (durationButton) {
-        function changeDuration() {
-            let durationText = document.getElementById("duration-text");
-            let newDuration = prompt("Enter the new duration in days:");
-
-            if (!isNaN(newDuration) && newDuration > 0) {
-                duration = parseInt(newDuration);
-                durationText.innerHTML = duration;
-                recalculate();
-            } else {
-                alert("Please enter a valid positive number for the duration.");
-            }
-        }
-
         durationButton.addEventListener("click", changeDuration);
     } else {
         console.error("Error: 'duration-button' element not found in DOM.");
     }
 }
 
+// Initialize both buttons after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
     initializeModelButton();
     initializeDurationButton();
