@@ -9,8 +9,8 @@ You are encouraged to use the provided naming convention for ease of review.
 /****************** create variables ******************/
 /* create variables to hold the values for modelName and duration */
 
-let modelName = "XYZ"; // Default model
-let duration = 0; // Default duration
+let modelName = "XYZ";
+let duration = 0;
 
 /****************** helper function ******************/
 /* create a function called recalculate() which will
@@ -33,7 +33,7 @@ function recalculate() {
             cost = duration * 213;
         }
 
-        costLabel.innerHTML = cost.toFixed(2); // Format to two decimal places
+        costLabel.innerHTML = cost.toFixed(2);
     } else {
         console.error("Error: 'calculated-cost' element not found in DOM.");
     }
@@ -107,8 +107,6 @@ function initializeDurationButton() {
         console.error("Error: 'duration-button' element not found in DOM.");
     }
 }
-
-/****************** Initialize all event listeners after DOM is ready ******************/
 
 document.addEventListener("DOMContentLoaded", function () {
     initializeModelButton();
